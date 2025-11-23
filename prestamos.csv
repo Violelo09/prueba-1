@@ -1,0 +1,2 @@
+prestamo_id,equipo_id,nombre_equipo,usuario_prestatario,tipo_usuario,fecha_solicitud,fecha_prestamo,fecha_devolucion,dias_autorizados,dias_reales_usados,retraso,estado,mes,anio
+P0001,1234,samsum,valentina,ESTUDIANTE,2025-11-23,2025-11-24,2025-11-25,1,1,NO,DEVUELTO,11,2025
