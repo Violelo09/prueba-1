@@ -1,13 +1,14 @@
-"""
-Sistema de Gestión de Inventario TechLab
-Aplicación de consola para gestionar equipos tecnológicos y préstamos
-"""
-
 import usuarios
 import equipos
 import prestamos
 import reportes
-
+# Estas importaciones permiten usar funciones que están en otros archivos:
+# - usuarios.py
+# - equipos.py
+# - prestamos.py
+# - reportes.py
+# Así el programa está organizado y no todo junto.
+# Cada archivo se encarga de una parte del sistema.
 
 def mostrar_menu_principal():
     """
@@ -22,13 +23,14 @@ def mostrar_menu_principal():
     print("4. Exportar Reporte CSV")
     print("5. Salir")
     print("\n" + "-"*60)
-
+    # Esta función solo muestra las opciones principales al usuario.
 
 def menu_equipos():
     """
     Submenú para gestión de equipos
     """
     while True:
+        # Este while True repite el menú hasta que el usuario decida volver.
         print("\n" + "="*50)
         print("GESTIÓN DE EQUIPOS")
         print("="*50)
@@ -38,18 +40,20 @@ def menu_equipos():
         print("4. Volver al menú principal")
         
         opcion = input("\nSeleccione una opción (1-4): ").strip()
-        
+        # Aquí el usuario elige lo que quiere hacer.
+
         if opcion == "1":
-            equipos.registrar_equipo()
+            equipos.registrar_equipo() 
+            # Llama a la función del archivo equipos.py
         elif opcion == "2":
             equipos.listar_equipos()
         elif opcion == "3":
             equipos.consultar_equipo()
         elif opcion == "4":
-            break
+            break  # Sale del submenú y regresa al menú principal
         else:
             print("\n✗ Opción inválida. Por favor seleccione una opción válida.")
-
+            # Si escribe algo incorrecto, le muestra este mensaje.
 
 def menu_prestamos():
     """
@@ -65,52 +69,61 @@ def menu_prestamos():
         print("4. Volver al menú principal")
         
         opcion = input("\nSeleccione una opción (1-4): ").strip()
-        
+
         if opcion == "1":
             prestamos.registrar_solicitud_prestamo()
+            # Registrar cuando un usuario pide un equipo.
         elif opcion == "2":
             prestamos.aprobar_rechazar_prestamo()
+            # Para decidir si se aprueba o se rechaza la solicitud.
         elif opcion == "3":
             prestamos.registrar_devolucion()
+            # Para registrar cuándo devuelven un equipo.
         elif opcion == "4":
             break
+            # Regresa al menú principal
         else:
             print("\n✗ Opción inválida. Por favor seleccione una opción válida.")
-
 
 def main():
     """
     Función principal del programa
     Maneja el flujo completo: login -> menú principal -> opciones
     """
-    # Iniciar sesión
+    # Primero se hace el inicio de sesión
     if not usuarios.iniciar_sesion():
-        return  # Si el login falla, terminar el programa
-    
-    # Ciclo principal del menú
+        return  
+        # Si iniciar_sesion() devuelve False, el programa se termina.
+
+    # Si el login fue correcto, se entra al menú principal
     while True:
-        mostrar_menu_principal()
+        mostrar_menu_principal()  
         opcion = input("Seleccione una opción (1-5): ").strip()
-        
+
         if opcion == "1":
-            menu_equipos()
+            menu_equipos()  # Va al submenú de equipos
         elif opcion == "2":
-            menu_prestamos()
+            menu_prestamos()  # Va al submenú de préstamos
         elif opcion == "3":
             prestamos.consultar_historial()
+            # Consultar todos los préstamos hechos antes
         elif opcion == "4":
             reportes.exportar_reporte_csv()
+            # Crea un archivo CSV con la información del sistema
         elif opcion == "5":
+            # Mensaje de salida
             print("\n" + "="*60)
             print("Gracias por usar el Sistema de Gestión TechLab")
             print("¡Hasta pronto!")
             print("="*60)
-            break
+            break  
+            # Cierra el programa
         else:
             print("\n✗ Opción inválida. Por favor seleccione una opción válida.")
-
 
 # Punto de entrada del programa
 if __name__ == "__main__":
     main()
-
+    # Esto significa:
+    # "Si este archivo se ejecuta directamente, correr la función main()"
+    # Es la forma correcta de iniciar un programa en Python.
